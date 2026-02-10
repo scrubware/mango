@@ -1,2 +1,0 @@
-/home/jarboola/CLionProjects/mango/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/jarboola/CLionProjects/mango/cmake-build-debug/CMakeFiles/rebuild_cache.dir
