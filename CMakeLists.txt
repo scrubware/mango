@@ -30,7 +30,7 @@ file(GLOB_RECURSE SOURCES_MODULES
         "src/*.ixx"
 )
 
-add_executable(mango ${SOURCES})
+add_library(mango STATIC ${SOURCES})
 set_source_files_properties(${SOURCES} PROPERTIES LANGUAGE CXX)
 set_target_properties(mango PROPERTIES CXX_SCAN_FOR_MODULES ON)
 target_sources(mango PUBLIC FILE_SET CXX_MODULES FILES ${SOURCES_MODULES})
