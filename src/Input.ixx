@@ -27,13 +27,4 @@ namespace Mango {
     export template <FixedString key> bool Held() {
         //return IsKeyDown(key);
     }
-
-}
-
-
-void test() {
-    if (Mango::Held<"fire">()) {
-
-    }
-
 }

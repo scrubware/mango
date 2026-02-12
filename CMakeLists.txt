@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 4.2)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(FETCHCONTENT_BASE_DIR "${CMAKE_SOURCE_DIR}/fetch-content" CACHE PATH "" FORCE)
+set(FETCHCONTENT_BASE_DIR "${CMAKE_SOURCE_DIR}/build/fetch-content" CACHE PATH "" FORCE)
 project(mango LANGUAGES C CXX)
 include(FetchContent)
 

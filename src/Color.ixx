@@ -18,7 +18,5 @@ namespace Mango {
 
     export constexpr Col White{WHITE};
     export constexpr Col Black{BLACK};
-
-
 }
 

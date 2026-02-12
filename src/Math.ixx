@@ -29,12 +29,12 @@ namespace Mango {
         explicit Vec3(const float v): x(v), y(v), z(v) {}
     };
 
-    export template <int D> auto Vec(Values&&... values) {
+    export template <int D = 2, typename... Values> auto Vec(Values&&... values) {
         if (D == 2) {
-            return Vec2{std::forward<Values>(values...)};
+            return Vec2{std::forward<Values>(values)...};
         }
         if (D == 3) {
-            return Vec3{std::forward<Values>(values...)};
+            return Vec3{std::forward<Values>(values)...};
         }
     }
 }
