@@ -27,6 +27,12 @@ export namespace Mango {
         InitWindow(window_width, window_height, window_name);
     }
 
+    void Initialize(const char* window_name, const int window_width, const int window_height) {
+        InitWindow(window_width, window_height, window_name);
+        Mango::window_width = window_width;
+        Mango::window_height = window_height;
+    }
+
     void MainLoop(const std::function<void()>& main) {
         while (!WindowShouldClose()) {
             BeginDrawing();
