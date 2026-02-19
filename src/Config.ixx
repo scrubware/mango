@@ -10,7 +10,7 @@ module;
 
 export module Mango.Config;
 
-import Mango.Core;
+export import Mango.Core;
 
 /*
  * Configs
@@ -22,8 +22,6 @@ import Mango.Core;
  * the config, they will produce their default value. This allows systems to be able to expect SOME value.
  *
  */
-
-
 
 namespace Mango {
 
@@ -51,7 +49,7 @@ namespace Mango {
 			static_assert(((S == Sections) || ...), "Config does not contain supplied section");
 			return config.at(S).at(key);
 		}
-
+					// From default key
 
 		// Get a concrete value (when using std::variant)
 		// Since default keys will always provide a default, no if-init is needed.
@@ -85,6 +83,7 @@ namespace Mango {
 		}
 
 		static Config Load() {
+		    // wip
 			auto c = Config();
 			return c;
 		}

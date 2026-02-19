@@ -38,7 +38,3 @@ namespace Mango {
         }
     }
 }
-
-void test() {
-    auto v = Mango::Vec<2>();
-}

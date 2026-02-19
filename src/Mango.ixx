@@ -15,6 +15,7 @@ export import Mango.Cam;
 export import Mango.Input;
 export import Mango.Schedule;
 export import Mango.Screen;
+export import Mango.Core;
 
 export namespace Mango {
 
