@@ -46,6 +46,11 @@ public:
         return *this;
     }
 
+    Schedule& PushStep(IDType id, std::function<void(Args...)> f) {
+        schedule.push_back(Step(id, f));
+        return *this;
+    }
+
     void Process(Args... args) const {
         std::stack<std::pair<Start, bool>> scope_stack;
 
