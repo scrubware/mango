@@ -51,8 +51,10 @@ export module Mango.Screen;
  *
  */
 
-// TODO: Update() takes a timestep.
-// TODO: General lower-priority Update() system, like 5, 10, 30, and 60hz. Although those should be strictly typed as Lowest, Highest, etc.
+// TODO: Strict ScreenManager
+// TODO: Maybe the strict screen manager can still have runtime keys AND autocomplete like the config.
+// TODO: still probably just better to do it as planned, with the template param of the screen.
+// TODO: ScreenManager holds strict static keyed resources, potentially including itself.
 
 namespace Mango {
 	export struct ScreenManager;
