@@ -46,8 +46,23 @@ public:
         return *this;
     }
 
-    Schedule& PushStep(IDType id, std::function<void(Args...)> f) {
+    Schedule& step(IDType id, std::function<void(Args...)> f) {
         schedule.push_back(Step(id, f));
+        return *this;
+    }
+
+    Schedule& toggle(IDType id, std::function<void(Args...)> f, bool open = true) {
+        schedule.push_back(Toggle(open, id, f));
+        return *this;
+    }
+
+    Schedule& start(IDType id, std::function<void(Args...)> f, bool outer = true, bool inner = true) {
+        schedule.push_back(Start(outer, inner, id, f));
+        return *this;
+    }
+
+    Schedule& end(IDType id, std::function<void(Args...)> f) {
+        schedule.push_back(End(id, f));
         return *this;
     }
 

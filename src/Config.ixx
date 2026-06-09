@@ -25,68 +25,81 @@ export import Mango.Core;
 
 namespace Mango {
 
-	export template <typename ConfigType, FixedString... Sections> struct Config {
-		using Key = std::pair<const char*, ConfigType>;
+    export template <typename ConfigType, FixedString... Sections>
+    struct Config {
+        using Key = std::pair<const char*, ConfigType>;
 
-	private:
-		using Section = std::map<std::string_view, ConfigType>;
-		std::map<std::string_view, Section> config;
+    private:
+        using Section = std::map<std::string_view, ConfigType>;
+        std::map<std::string_view, Section> config;
 
-	public:
-		template <FixedString S> const Section& get() const {										// Get a section
-			static_assert(((S == Sections) || ...), "Config does not contain supplied section");
-			return config.at(S);
-		}
+    public:
+        template <FixedString S>
+        const Section& get() const { // Get a section
+            static_assert(((S == Sections) || ...), "Config does not contain supplied section");
+            return config.at(S);
+        }
 
-		// Get a concrete value.
-		// Usage: auto v = config.get<SECTION>(key); type* v = std::get_if<type>(v);
-		template <FixedString S> ConfigType get(const Key key) const {								// From default key
-			static_assert(((S == Sections) || ...), "Config does not contain supplied section");
-			if (config.at(S).contains(key.first)) return config.at(S).at(key.first);
-			return key.second;
-		}
-		template <FixedString S> ConfigType get(const char* key) const {							// From runtime key
-			static_assert(((S == Sections) || ...), "Config does not contain supplied section");
-			return config.at(S).at(key);
-		}
-					// From default key
+        // Get a concrete value.
+        // Usage: auto v = config.get<SECTION>(key); type* v = std::get_if<type>(v);
+        template <FixedString S>
+        ConfigType get(const Key key) const { // From default key
+            static_assert(((S == Sections) || ...), "Config does not contain supplied section");
+            if (config.at(S).contains(key.first)) {
+                return config.at(S).at(key.first);
+            }
+            return key.second;
+        }
+        template <FixedString S>
+        ConfigType get(const char* key) const { // From runtime key
+            static_assert(((S == Sections) || ...), "Config does not contain supplied section");
+            return config.at(S).at(key);
+        }
+        // From default key
 
-		// Get a concrete value (when using std::variant)
-		// Since default keys will always provide a default, no if-init is needed.
-		template <FixedString S, typename T> T get(const Key key) const {							// From default key
-			static_assert(requires(ConfigType t) {
-				{ t.valueless_by_exception() } -> std::convertible_to<bool>;
-			}, "You only need to use Config's type-templated get if your Config's value type is a std::variant.");
-			static_assert(((S == Sections) || ...), "Config does not contain supplied section");
-			if (config.at(S).contains(key.first)) return std::get<T>(config.at(S).at(key.first));
-			return std::get<T>(key.second);
-		}
-		// Usage: if (auto* v = config.get<SECTION, type>(key)) { /* do conditionally*/ }
-		template <FixedString S, typename T> T* get(const char* key) const {						// From runtime key
-			static_assert(requires(ConfigType t) {
-				{ t.valueless_by_exception() } -> std::convertible_to<bool>;
-			}, "You only need to use Config's type-templated get if your Config's value type is a std::variant.");
-			static_assert(((S == Sections) || ...), "Config does not contain supplied section");
-			return std::get_if<T>(config.at(S).at(key));
-		}
+        // Get a concrete value (when using std::variant)
+        // Since default keys will always provide a default, no if-init is needed.
+        template <FixedString S, typename T>
+        T get(const Key key) const { // From default key
+            static_assert(
+                requires(ConfigType t) {
+                    { t.valueless_by_exception() } -> std::convertible_to<bool>;
+                }, "You only need to use Config's type-templated get if your Config's value type is a std::variant.");
+            static_assert(((S == Sections) || ...), "Config does not contain supplied section");
+            if (config.at(S).contains(key.first)) {
+                return std::get<T>(config.at(S).at(key.first));
+            }
+            return std::get<T>(key.second);
+        }
+        // Usage: if (auto* v = config.get<SECTION, type>(key)) { /* do conditionally*/ }
+        template <FixedString S, typename T>
+        T* get(const char* key) const { // From runtime key
+            static_assert(
+                requires(ConfigType t) {
+                    { t.valueless_by_exception() } -> std::convertible_to<bool>;
+                }, "You only need to use Config's type-templated get if your Config's value type is a std::variant.");
+            static_assert(((S == Sections) || ...), "Config does not contain supplied section");
+            return std::get_if<T>(config.at(S).at(key));
+        }
 
 
-		template <FixedString S> Config& set(const Key key, const ConfigType val) {					// From default key
-			static_assert(((S == Sections) || ...), "Config does not contain supplied section");
-			config.at(S).at(key.first) = val;
-			return this;
-		}
-		template <FixedString S> Config& set(const char* key, const ConfigType val) {				// From runtime key
-			static_assert(((S == Sections) || ...), "Config does not contain supplied section");
-			config.at(S).at(key) = val;
-			return this;
-		}
+        template <FixedString S>
+        Config& set(const Key key, const ConfigType val) { // From default key
+            static_assert(((S == Sections) || ...), "Config does not contain supplied section");
+            config.at(S).at(key.first) = val;
+            return this;
+        }
+        template <FixedString S>
+        Config& set(const char* key, const ConfigType val) { // From runtime key
+            static_assert(((S == Sections) || ...), "Config does not contain supplied section");
+            config.at(S).at(key) = val;
+            return this;
+        }
 
-		static Config Load() {
-		    // wip
-			auto c = Config();
-			return c;
-		}
-	};
-}
-
+        static Config Load() {
+            // wip
+            auto c = Config();
+            return c;
+        }
+    };
+} // namespace Mango
