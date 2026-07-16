@@ -12,7 +12,6 @@ export module Mango;
 export import Mango.Math;
 export import Mango.Color;
 export import Mango.Cam;
-export import Mango.Input;
 export import Mango.Schedule;
 export import Mango.Screen;
 export import Mango.Core;
